@@ -1,0 +1,25 @@
+{
+  "commands": {
+    "help": {
+      "description": "Shows available commands",
+      "output": "Available commands: help, clear, echo, date, version"
+    },
+    "clear": {
+      "description": "Clears the console output",
+      "special": true
+    },
+    "date": {
+      "description": "Shows current date and time",
+      "dynamic": true
+    },
+    "version": {
+      "description": "Shows version information",
+      "output": "PseudoConsole v1.0.0"
+    },
+    "echo": {
+      "description": "Echoes the provided text",
+      "dynamic": true
+    }
+  }
+}
+
