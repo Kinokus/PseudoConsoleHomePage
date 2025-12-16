@@ -13,6 +13,17 @@ export default function Home() {
       return commands.help.output
     }
     
+    // Handle help <command> - show description of specific command
+    if (cmd.startsWith('help ')) {
+      const helpCommand = cmd.substring(5).trim()
+      if (commands[helpCommand as keyof typeof commands]) {
+        const commandInfo = commands[helpCommand as keyof typeof commands]
+        return commandInfo.description || `No description available for '${helpCommand}'`
+      } else {
+        return `Command '${helpCommand}' not found. Type 'help' for available commands.`
+      }
+    }
+    
     // Handle date command
     if (cmd === 'date') {
       return new Date().toLocaleString()
@@ -26,6 +37,29 @@ export default function Home() {
     // Handle echo command
     if (cmd.startsWith('echo ')) {
       return command.substring(5)
+    }
+    
+    // Handle history command
+    if (cmd === 'history') {
+      if (typeof window === 'undefined') {
+        return 'History not available'
+      }
+      
+      const stored = localStorage.getItem('console_command_history')
+      if (!stored) {
+        return 'No command history found.'
+      }
+      
+      try {
+        const history = JSON.parse(stored) as string[]
+        if (history.length === 0) {
+          return 'No command history found.'
+        }
+        
+        return history.map((cmd, index) => `${index + 1}. ${cmd}`).join('\n')
+      } catch (e) {
+        return 'Error reading command history.'
+      }
     }
     
     // Command not found

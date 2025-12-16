@@ -1,8 +1,8 @@
 {
   "commands": {
     "help": {
-      "description": "Shows available commands",
-      "output": "Available commands: help, clear, echo, date, version"
+      "description": "Shows available commands. Use 'help <command>' to get description of a specific command",
+      "output": "Available commands: help, clear, echo, date, version, history\nUse 'help <command>' to get more information about a specific command"
     },
     "clear": {
       "description": "Clears the console output",
@@ -18,6 +18,10 @@
     },
     "echo": {
       "description": "Echoes the provided text",
+      "dynamic": true
+    },
+    "history": {
+      "description": "Shows the command history",
       "dynamic": true
     }
   }
