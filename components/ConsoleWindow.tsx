@@ -1,20 +1,71 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './ConsoleWindow.module.css'
 
 interface ConsoleWindowProps {
   title?: string
   children?: React.ReactNode
   borderStyle?: 'single' | 'double'
+  onCommand?: (command: string) => string | void
 }
 
 export default function ConsoleWindow({ 
   title = 'Console', 
   children,
-  borderStyle = 'single'
+  borderStyle = 'single',
+  onCommand
 }: ConsoleWindowProps) {
   const [isMaximized, setIsMaximized] = useState(false)
+  const [command, setCommand] = useState('')
+  const [commandHistory, setCommandHistory] = useState<Array<{ type: 'input' | 'output', text: string }>>([
+    { type: 'output', text: 'Welcome to the console' },
+    { type: 'output', text: 'Type your commands here...' }
+  ])
+  const inputRef = useRef<HTMLInputElement>(null)
+  const outputRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Auto-scroll to bottom when new output is added
+    if (outputRef.current) {
+      outputRef.current.scrollTop = outputRef.current.scrollHeight
+    }
+  }, [commandHistory])
+
+  const handleCommand = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!command.trim()) return
+
+    const cmd = command.trim().toLowerCase()
+
+    // Handle clear command specially
+    if (cmd === 'clear') {
+      setCommandHistory([])
+      setCommand('')
+      inputRef.current?.focus()
+      return
+    }
+
+    // Add command to history
+    setCommandHistory(prev => [...prev, { type: 'input', text: command }])
+
+    // Execute command
+    let output = ''
+    if (onCommand) {
+      const result = onCommand(command)
+      output = result || ''
+    } else {
+      // Default command handling
+      output = `Command: ${command}`
+    }
+
+    if (output) {
+      setCommandHistory(prev => [...prev, { type: 'output', text: output }])
+    }
+
+    setCommand('')
+    inputRef.current?.focus()
+  }
 
   return (
     <div className={styles.consoleWindow}>
@@ -29,48 +80,43 @@ export default function ConsoleWindow({
 
       {/* Window Frame */}
       <div className={`${styles.frame} ${styles[`border${borderStyle === 'double' ? 'Double' : 'Single'}`]}`}>
-        {/* Top Border */}
-        {/* <div className={styles.borderTop}>
-          <span className={styles.title}>{title}</span>
-          <span className={styles.controls}>
-            <button 
-              className={styles.btn}
-              onClick={() => setIsMaximized(!isMaximized)}
-              aria-label="Maximize"
-            >
-              □
-            </button>
-            <button 
-              className={styles.btn}
-              aria-label="Close"
-            >
-              ✕
-            </button>
-          </span>
-        </div> */}
-
         {/* Content Area */}
         <div className={styles.content}>
-          <div className={styles.inner}>
+          <div className={styles.inner} ref={outputRef}>
             {children || (
               <div className={styles.output}>
-                <div className={styles.line}>
-                  <span className={styles.prompt}>$</span>{' '}
-                  <span>Welcome to the console</span>
-                </div>
-                <div className={styles.line}>
-                  <span className={styles.prompt}>$</span>{' '}
-                  <span>Type your commands here...</span>
-                </div>
+                {commandHistory.map((item, index) => (
+                  <div key={index} className={styles.line}>
+                    {item.type === 'input' ? (
+                      <>
+                        <span className={styles.prompt}>$</span>{' '}
+                        <span>{item.text}</span>
+                      </>
+                    ) : (
+                      <span>{item.text}</span>
+                    )}
+                  </div>
+                ))}
               </div>
             )}
           </div>
         </div>
 
-        {/* Bottom Border */}
-        {/* <div className={styles.borderBottom}>
-          <span className={styles.status}>Ready</span>
-        </div> */}
+        {/* Command Input */}
+        <div className={styles.commandInput}>
+          <form onSubmit={handleCommand} className={styles.commandForm}>
+            <span className={styles.prompt}>$</span>
+            <input
+              ref={inputRef}
+              type="text"
+              value={command}
+              onChange={(e) => setCommand(e.target.value)}
+              className={styles.input}
+              placeholder="Enter command..."
+              autoFocus
+            />
+          </form>
+        </div>
       </div>
     </div>
   )
