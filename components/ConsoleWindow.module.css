@@ -1,0 +1,149 @@
+.consoleWindow {
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #00ff00;
+  background: #000000;
+  padding: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.menuBar {
+  display: flex;
+  background: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  padding: 2px 0;
+  margin-bottom: 2px;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+}
+
+.menuItem {
+  padding: 4px 12px;
+  cursor: pointer;
+  color: #cccccc;
+  border-right: 1px solid #3c3c3c;
+  user-select: none;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+}
+
+.menuItem:hover {
+  background: #2d2d2d;
+}
+
+.frame {
+  background: #000000;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+}
+
+.borderSingle {
+  border: 1px solid #00ff00;
+}
+
+.borderDouble {
+  border: 3px solid #00ff00;
+}
+
+.borderTop,
+.borderBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a1a;
+  color: #00ff00;
+  padding: 4px 8px;
+  white-space: nowrap;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  border-left: none;
+  border-right: none;
+}
+
+.borderSingle .borderTop,
+.borderSingle .borderBottom {
+  border-top: 1px solid #00ff00;
+  border-bottom: 1px solid #00ff00;
+}
+
+.borderDouble .borderTop,
+.borderDouble .borderBottom {
+  border-top: 3px solid #00ff00;
+  border-bottom: 3px solid #00ff00;
+}
+
+.title {
+  padding: 0 8px;
+  color: #00ff00;
+  font-weight: bold;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  white-space: nowrap;
+}
+
+.controls {
+  display: flex;
+  gap: 4px;
+  padding: 0 4px;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  color: #00ff00;
+  cursor: pointer;
+  padding: 0 4px;
+  font-size: 12px;
+  line-height: 1;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+}
+
+.btn:hover {
+  background: #2d2d2d;
+}
+
+.content {
+  min-height: 300px;
+}
+
+.inner {
+  padding: 12px;
+  background: #000000;
+  overflow-y: auto;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  border-left: none;
+  border-right: none;
+}
+
+.borderSingle .inner {
+  border-left: 1px solid #00ff00;
+  border-right: 1px solid #00ff00;
+}
+
+.borderDouble .inner {
+  border-left: 3px solid #00ff00;
+  border-right: 3px solid #00ff00;
+}
+
+.output {
+  color: #00ff00;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+}
+
+.line {
+  margin-bottom: 4px;
+  white-space: pre-wrap;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+}
+
+.prompt {
+  color: #00ff00;
+  font-weight: bold;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+}
+
+.status {
+  padding: 0 8px;
+  color: #00ff00;
+  font-size: 12px;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  white-space: nowrap;
+}
+
+
