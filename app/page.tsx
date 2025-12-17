@@ -68,7 +68,7 @@ export default function Home() {
   }
 
   return (
-    <main style={{ minHeight: '100vh', background: '#000', padding: '20px' }}>
+    <main style={{ height: '100vh', background: '#000', display: 'flex', flexDirection: 'column' }}>
       <ConsoleWindow 
         title="PseudoConsole Terminal" 
         borderStyle="single"

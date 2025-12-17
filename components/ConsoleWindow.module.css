@@ -6,6 +6,9 @@
   background: #000000;
   padding: 20px;
   font-variant-numeric: tabular-nums;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .menuBar {
@@ -33,6 +36,10 @@
 .frame {
   background: #000000;
   font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .borderSingle {
@@ -99,7 +106,11 @@
 }
 
 .content {
-  min-height: 300px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .inner {
@@ -109,6 +120,8 @@
   font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
   border-left: none;
   border-right: none;
+  flex: 1;
+  min-height: 0;
 }
 
 .borderSingle .inner {
@@ -151,6 +164,7 @@
   background: #000000;
   border-top: 1px solid #00ff00;
   font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  flex-shrink: 0;
 }
 
 .borderDouble .commandInput {
